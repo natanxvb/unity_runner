@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform player;
     float levelLength = 106.3f;
     int count = 50;   
+    [SerializeField] GameObject Shield;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
        {
             CreateLocation();
        }
+        Invoke("GenerateObject", Random.Range(20, 30));
     }
 
     void CreateLocation()
@@ -37,4 +39,10 @@ public class GameManager : MonoBehaviour
             CreateLocation();
         }
     }  
+    void GenerateObject()
+    {
+        float distance = Random.Range(100, 200);
+        Instantiate(Shield, player.position + new Vector3(0,2,distance), transform.rotation);
+        Invoke("GenerateObject", Random.Range(20, 30));
+    }    
 }

@@ -65,5 +65,14 @@ public class CharacterScript : MonoBehaviour
             menu.SetActive(true);
             anim.SetBool("death", true);
         }
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Money"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
+
