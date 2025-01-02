@@ -786,7 +786,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Score: 1000000'
+  m_text: 'Score: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -981,7 +981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9298dcc78ae34c4aaa14ff373b822b9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.62
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9298dcc78ae34c4aaa14ff373b822b9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1493,8 +1493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locations:
-  - {fileID: 5191265135184779030, guid: f344eddf207f90b498e77a25c889f521, type: 3}
-  - {fileID: 2515902689756826517, guid: 236e6fa41e39d1541a4377680b78c57c, type: 3}
+  - {fileID: 5191265135184779030, guid: 29d3369555b4c564f926b331cbd53cfb, type: 3}
+  - {fileID: 5191265135184779030, guid: fe5413746cf5e3f40a4abe15b9d9deca, type: 3}
   player: {fileID: 1036885834}
 --- !u!4 &1287863156
 Transform:
