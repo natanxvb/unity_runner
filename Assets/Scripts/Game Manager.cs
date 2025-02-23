@@ -1,66 +1,53 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] List<GameObject> locations = new List<GameObject>(); 
-    [SerializeField] Transform player; // Referencja do gracza
-    [SerializeField] GameObject shield; // Referencja do prefabu tarczy
+    [SerializeField] private List<GameObject> locations = new();
+    [SerializeField] private Transform player;
+    [SerializeField] private GameObject shield;
 
-    float levelLength = 106.3f; // Długość poziomu
-    int count = 50; // Liczba generowanych obiektów poziomu
+    private const float LevelLengthIncrement = 106.3f;
+    private const int InitialLocationCount = 50;
+    private float levelLength = LevelLengthIncrement;
 
-    void Start()
+    private void Start()
     {
-        // Generowanie pierwszej lokacji
         Instantiate(locations[0], transform.forward, transform.rotation);
 
-        // Generowanie kolejnych lokacji
-        for (int i = 0; i < count; i++)
+        for (var i = 0; i < InitialLocationCount; i++)
         {
             CreateLocation();
         }
 
-        // Pierwsze wywołanie funkcji generującej tarczę
-        Invoke("GenerateObject", Random.Range(20, 30));
+        Invoke(nameof(PlaceShield), Random.Range(20, 30));
     }
 
-    void Update()
+    private void Update()
     {
-        // Sprawdzanie, czy trzeba wygenerować nową lokację
-        if (player.position.z > levelLength - 106.3f * count)
+        if (player.position.z > levelLength - LevelLengthIncrement * InitialLocationCount)
         {
             CreateLocation();
         }
     }
 
-    void CreateLocation()
+    private void CreateLocation()
     {
-        // Generowanie losowej lokacji
         Instantiate(locations[Random.Range(0, locations.Count)], transform.forward * levelLength, transform.rotation);
-        levelLength += 106.3f;
+        levelLength += LevelLengthIncrement;
     }
 
-    void GenerateObject()
+    private void PlaceShield()
     {
-        // Generowanie tarczy w losowej odległości przed graczem
-        float distance = Random.Range(30, 70);
-        Vector3 spawnPosition = player.position + new Vector3(0, 2, distance);
-
+        var spawnPosition = player.position + new Vector3(0, 2, Random.Range(30, 70));
         Instantiate(shield, spawnPosition, Quaternion.identity);
-
-        // Debugowanie, aby upewnić się, że tarcza została wygenerowana
         Debug.Log("Shield generated at: " + spawnPosition);
-
-        // Ponowne wywołanie funkcji po losowym czasie
-        Invoke("GenerateObject", Random.Range(5, 10));
+        Invoke(nameof(PlaceShield), Random.Range(5, 10));
     }
 
     public void RestartGame()
     {
-        // Restart aktualnej sceny
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
